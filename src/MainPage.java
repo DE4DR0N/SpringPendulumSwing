@@ -1,8 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class LaunchPage extends JFrame{
-    public LaunchPage(){
+public class MainPage extends JFrame{
+    public MainPage(){
         super("Launch Page");
         JButton buttonSpringSim = new JButton("Open application");
         JButton buttonInformAuth = new JButton("About the author");
@@ -20,6 +20,6 @@ public class LaunchPage extends JFrame{
         setVisible(true);
     }
     public static void main(String[] args) {
-        new LaunchPage();
+        new MainPage();
     }
 }
