@@ -20,14 +20,14 @@ public class InformAuth {
         JPanel textPanel = new JPanel();
         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
         textPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        // Номер учебной группы
-        JLabel groupLabel = new JLabel("Группа: Ваша_Группа");
-        groupLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        textPanel.add(groupLabel);
         // ФИО
-        JLabel nameLabel = new JLabel("ФИО: Ваши_Имя_Фамилия");
+        JLabel nameLabel = new JLabel("ФИО: Гедревич Евгений Анатольевич");
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         textPanel.add(nameLabel);
+        // Номер учебной группы
+        JLabel groupLabel = new JLabel("Группа: 10702221");
+        groupLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        textPanel.add(groupLabel);
         // Mail
         JLabel mailLabel = new JLabel("eugene.deadron@gmail.com");
         mailLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
