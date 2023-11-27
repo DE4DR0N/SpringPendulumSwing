@@ -35,7 +35,7 @@ public class InformAuth {
         frame.add(textPanel, BorderLayout.CENTER);
 
         // Установка свойств окна
-        frame.setSize(280, 480);
+        frame.setSize(280, 360);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
