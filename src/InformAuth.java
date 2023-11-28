@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class InformAuth {
@@ -7,7 +8,6 @@ public class InformAuth {
 
         // Установка менеджера компоновки
         frame.setLayout(new BorderLayout());
-
         // Добавление фотографии
         JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         ImageIcon icon = new ImageIcon("src/Imgs/IMG_2003.jpg");
@@ -16,26 +16,32 @@ public class InformAuth {
         imagePanel.add(imageLabel);
         frame.add(imagePanel, BorderLayout.NORTH);
 
-        // Создание панели для текста
-        JPanel textPanel = new JPanel();
-        textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
-        textPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // Создание панели для компонентов
+        JPanel cmpntsPanel = new JPanel();
+        cmpntsPanel.setLayout(new BoxLayout(cmpntsPanel, BoxLayout.Y_AXIS));
+        cmpntsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         // ФИО
         JLabel nameLabel = new JLabel("ФИО: Гедревич Евгений Анатольевич");
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        textPanel.add(nameLabel);
+        cmpntsPanel.add(nameLabel);
         // Номер учебной группы
         JLabel groupLabel = new JLabel("Группа: 10702221");
         groupLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        textPanel.add(groupLabel);
+        cmpntsPanel.add(groupLabel);
         // Mail
         JLabel mailLabel = new JLabel("eugene.deadron@gmail.com");
         mailLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        textPanel.add(mailLabel);
-        frame.add(textPanel, BorderLayout.CENTER);
+        cmpntsPanel.add(mailLabel);
+        frame.add(cmpntsPanel, BorderLayout.CENTER);
+        cmpntsPanel.add(Box.createVerticalStrut(20));
+        // Button
+        JButton bttnBack = new JButton("Назад");
+        bttnBack.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bttnBack.addActionListener(e -> frame.dispose());
+        cmpntsPanel.add(bttnBack);
 
         // Установка свойств окна
-        frame.setSize(280, 360);
+        frame.setSize(280, 420);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
