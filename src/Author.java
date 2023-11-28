@@ -1,9 +1,8 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class InformAuth {
-    public InformAuth() {
+public class Author {
+    public Author() {
         JFrame frame = new JFrame("About the author");
 
         // Установка менеджера компоновки
