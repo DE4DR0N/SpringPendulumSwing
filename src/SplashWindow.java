@@ -4,19 +4,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SplashWindow extends JWindow {
-    JLabel label = new JLabel("This is smth");
-    JButton btnNext = new JButton("Next");
-    JButton btnExit = new JButton("Exit");
+    JLabel lblTitle = new JLabel("Белорусский национальный технический универститет");
+    JButton btnNext = new JButton("Далее");
+    JButton btnExit = new JButton("Выход");
     JPanel panel = new JPanel();
+    JPanel titlePanel = new JPanel();
+    JPanel informMain = new JPanel();
 
     SplashWindow() {
-        setSize(400, 50);
-
+        titlePanel.setLayout(new BorderLayout());
         panel.setLayout(new BorderLayout(5,10));
-        panel.add(label, BorderLayout.NORTH);
+        panel.add(lblTitle, BorderLayout.NORTH);
         panel.add(btnNext, BorderLayout.WEST);
         panel.add(btnExit, BorderLayout.EAST);
         add(panel);
+
+        setSize(400, 50);
         setLocationRelativeTo(null);
 
         btnNext.addActionListener(new ActionListener() {
