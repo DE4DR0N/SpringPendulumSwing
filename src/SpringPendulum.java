@@ -40,7 +40,8 @@ public class SpringPendulum extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
 
-        JPanel mainPanel = new JPanel(new GridLayout(1, 3));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         mainPanel.add(createChartPanel(displacementSeries, "Displacement"));
         mainPanel.add(createChartPanel(velocitySeries, "Velocity"));
@@ -80,58 +81,5 @@ public class SpringPendulum extends JFrame {
 
         return new ChartPanel(chart);
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new SpringPendulum().setVisible(true);
-            }
-        });
-    }
 }
 
-class DynamicPendulum {
-    private static final double MASS = 1.0;
-    private static final double SPRING_CONSTANT = 10.0;
-
-    private double displacement;
-    private double velocity;
-    private double acceleration;
-    private double time;
-    private double gravity;
-
-    public DynamicPendulum(double initialDisplacement, double initialVelocity, double initialAcceleration, double gravity) {
-        this.displacement = initialDisplacement;
-        this.velocity = initialVelocity;
-        this.acceleration = initialAcceleration;
-        this.time = 0.0;
-        this.gravity = gravity;
-    }
-
-    public double getDisplacement() {
-        return displacement;
-    }
-
-    public double getVelocity() {
-        return velocity;
-    }
-
-    public double getAcceleration() {
-        return acceleration;
-    }
-
-    public double getTime() {
-        return time;
-    }
-
-    public void update() {
-        double springForce = -SPRING_CONSTANT * displacement;
-        double netForce = MASS * gravity + springForce;
-
-        acceleration = netForce / MASS;
-        velocity += acceleration * 0.02; // time step = 0.02 seconds
-        displacement += velocity * 0.02;
-        time += 0.02;
-    }
-}
