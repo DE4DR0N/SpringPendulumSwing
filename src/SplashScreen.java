@@ -72,7 +72,7 @@ public class SplashScreen extends JWindow {
 
         mainPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        addCenteredLabel("Ведомость для проведения зачёта",
+        addCenteredLabel("Колебательные системы: пружинный маятник",
                 mainPanel, new Font(fontName, Font.BOLD, 22));
     }
 
@@ -80,10 +80,10 @@ public class SplashScreen extends JWindow {
         JLabel imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        try (InputStream input = getClass().getResourceAsStream("/pictures/IMG_2003.jpg")) {
+        try (InputStream input = getClass().getResourceAsStream("/pictures/SpringPendulum.jpg")) {
             if (input != null) {
                 ImageIcon icon = new ImageIcon(ImageIO.read(input));
-                icon = new ImageIcon(icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH));
+                icon = new ImageIcon(icon.getImage().getScaledInstance(140, 160, Image.SCALE_SMOOTH));
                 imageLabel.setIcon(icon);
             }
         } catch (IOException e) {
@@ -132,12 +132,16 @@ public class SplashScreen extends JWindow {
     private void onNextButtonClick() {
         exitTimer.stop();
         SwingUtilities.invokeLater(() -> {
-            new MainPage();
+            new MainPage().setVisible(true);
             dispose();
         });
     }
 
     private void onExitButtonClick() {
         System.exit(0);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(SplashScreen::new);
     }
 }
