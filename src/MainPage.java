@@ -7,6 +7,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,6 +53,7 @@ public class MainPage extends JFrame {
 
     private void setupUI() {
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(5,10,5,10));
 
         JPanel chartPanel = new JPanel(new GridLayout(1, 3));
         displacementSeries = new XYSeries("Смещение");
@@ -75,19 +77,19 @@ public class MainPage extends JFrame {
         periodField = new JTextField();
         periodField.setEditable(false);
 
-        inputPanel.add(new JLabel("Масса:"));
+        inputPanel.add(new JLabel("Масса:", SwingConstants.RIGHT));
         inputPanel.add(massField);
-        inputPanel.add(new JLabel("Постоянная пружины:"));
+        inputPanel.add(new JLabel("Постоянная пружины:", SwingConstants.RIGHT));
         inputPanel.add(springConstantField);
-        inputPanel.add(new JLabel("Начальное отклонение:"));
+        inputPanel.add(new JLabel("Начальное отклонение:", SwingConstants.RIGHT));
         inputPanel.add(initialDisplacementField);
-        inputPanel.add(new JLabel("Начальная скорость:"));
+        inputPanel.add(new JLabel("Начальная скорость:", SwingConstants.RIGHT));
         inputPanel.add(initialVelocityField);
-        inputPanel.add(new JLabel("Гравитационная постоянная:"));
+        inputPanel.add(new JLabel("Гравитационная постоянная:", SwingConstants.RIGHT));
         inputPanel.add(gravityField);
-        inputPanel.add(new JLabel("Время моделирования:"));
+        inputPanel.add(new JLabel("Время моделирования:", SwingConstants.RIGHT));
         inputPanel.add(targetTimeField);
-        inputPanel.add(new JLabel("Период колебания:"));
+        inputPanel.add(new JLabel("Период колебания:", SwingConstants.RIGHT));
         inputPanel.add(periodField);
 
         JPanel buttonsPanel = new JPanel();
