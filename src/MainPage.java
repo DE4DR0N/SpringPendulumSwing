@@ -157,44 +157,50 @@ public class MainPage extends JFrame {
     }
 
     private void startTimer() {
-        double mass = Double.parseDouble(massField.getText());
-        double springConstant = Double.parseDouble(springConstantField.getText());
-        double initialDisplacement = Double.parseDouble(initialDisplacementField.getText());
-        double initialVelocity = Double.parseDouble(initialVelocityField.getText());
-        double gravity = Double.parseDouble(gravityField.getText());
-        double targetTime = Double.parseDouble(targetTimeField.getText());
+        try {
+            double mass = Double.parseDouble(massField.getText());
+            double springConstant = Double.parseDouble(springConstantField.getText());
+            double initialDisplacement = Double.parseDouble(initialDisplacementField.getText());
+            double initialVelocity = Double.parseDouble(initialVelocityField.getText());
+            double gravity = Double.parseDouble(gravityField.getText());
+            double targetTime = Double.parseDouble(targetTimeField.getText());
 
-        pendulum = new SpringPendulum(mass, springConstant, initialDisplacement, initialVelocity, gravity);
+            pendulum = new SpringPendulum(mass, springConstant, initialDisplacement, initialVelocity, gravity);
 
-        timer = new Timer(20, new ActionListener() {
-            private double elapsedTime = 0.0;
+            timer = new Timer(20, new ActionListener() {
+                private double elapsedTime = 0.0;
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                double time = pendulum.getTime();
-                double displacement = pendulum.getDisplacement();
-                double velocity = pendulum.getVelocity();
-                double acceleration = pendulum.getAcceleration();
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    double time = pendulum.getTime();
+                    double displacement = pendulum.getDisplacement();
+                    double velocity = pendulum.getVelocity();
+                    double acceleration = pendulum.getAcceleration();
 
-                displacementSeries.add(time, displacement);
-                velocitySeries.add(time, velocity);
-                accelerationSeries.add(time, acceleration);
+                    displacementSeries.add(time, displacement);
+                    velocitySeries.add(time, velocity);
+                    accelerationSeries.add(time, acceleration);
 
-                pendulum.update();
-                elapsedTime += 0.02;
 
-                if (elapsedTime >= targetTime) {
-                    timer.stop();
-                    startButton.setEnabled(true);
-                    clearButton.setEnabled(true);
-                    saveButton.setEnabled(true);
-                    logDataButton.setEnabled(true);
-                    double period = pendulum.calculatePeriod();
-                    periodField.setText(String.format("%.2f", period) + " секунд");
+                    pendulum.update();
+                    elapsedTime += 0.02;
+
+                    if (elapsedTime >= targetTime) {
+                        timer.stop();
+                        startButton.setEnabled(true);
+                        clearButton.setEnabled(true);
+                        saveButton.setEnabled(true);
+                        logDataButton.setEnabled(true);
+                        double period = pendulum.calculatePeriod();
+                        periodField.setText(String.format("%.2f", period) + " секунд");
+                    }
                 }
-            }
-        });
-        timer.start();
+            });
+            timer.start();
+        }
+        catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Неверные данные. Введите корректные данные", "Ошибка", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void clearCharts() {
