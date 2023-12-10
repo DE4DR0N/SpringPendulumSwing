@@ -42,7 +42,7 @@ public class MainPage extends JFrame {
     private Timer timer;
 
     public MainPage() {
-        super("Spring Pendulum");
+        super("Пружинный маятник");
 
         setupUI();
         setSize(WIDTH, HEIGHT);
@@ -279,9 +279,5 @@ public class MainPage extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new MainPage().setVisible(true));
     }
 }
