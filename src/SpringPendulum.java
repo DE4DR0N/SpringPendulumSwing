@@ -1,11 +1,11 @@
 public class SpringPendulum {
-    private double mass;
-    private double springConstant;
+    private final double mass;
+    private final double springConstant;
     private double displacement;
     private double velocity;
     private double acceleration;
     private double time;
-    private double gravity;
+    private final double gravity;
 
     public SpringPendulum(double mass, double springConstant, double initialDisplacement, double initialVelocity, double gravity) {
         this.mass = mass;

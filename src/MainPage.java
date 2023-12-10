@@ -99,10 +99,6 @@ public class MainPage extends JFrame {
 
         startButton = new JButton("Выполнить");
         startButton.addActionListener(e -> {
-            startButton.setEnabled(false);
-            clearButton.setEnabled(false);
-            saveButton.setEnabled(false);
-            logDataButton.setEnabled(false);
             clearCharts();
             startTimer();
         });
@@ -164,6 +160,11 @@ public class MainPage extends JFrame {
             double initialVelocity = Double.parseDouble(initialVelocityField.getText());
             double gravity = Double.parseDouble(gravityField.getText());
             double targetTime = Double.parseDouble(targetTimeField.getText());
+
+            startButton.setEnabled(false);
+            clearButton.setEnabled(false);
+            saveButton.setEnabled(false);
+            logDataButton.setEnabled(false);
 
             pendulum = new SpringPendulum(mass, springConstant, initialDisplacement, initialVelocity, gravity);
 
