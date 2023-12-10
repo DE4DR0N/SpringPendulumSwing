@@ -22,7 +22,7 @@ public class About extends JDialog {
         pnlText.add(new JLabel("1. Выводить графики скорости, усорения, положения тела в пространстве"));
         pnlText.add(new JLabel("2. Сохранять результаты в файл"));
 
-        ImageIcon imageIcon = new ImageIcon("src/pictures/IMG_2003.jpg");
+        ImageIcon imageIcon = new ImageIcon("src/pictures/AppScreen.png");
         imageIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(200,200, Image.SCALE_SMOOTH));
         JLabel imageLabel = new JLabel(imageIcon);
 
