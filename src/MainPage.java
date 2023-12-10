@@ -11,7 +11,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class MainPage extends JFrame {
@@ -30,6 +32,7 @@ public class MainPage extends JFrame {
     private JButton aboutProgramButton;
     private JButton exitButton;
     private JButton saveButton;
+    private JButton logDataButton;
 
     private JTextField massField;
     private JTextField springConstantField;
@@ -67,6 +70,7 @@ public class MainPage extends JFrame {
 
         JPanel controlPanel = new JPanel(new GridLayout(2, 1));
         JPanel inputPanel = new JPanel(new GridLayout(7, 2));
+        inputPanel.setBorder(BorderFactory.createEmptyBorder(10,150,0,150));
 
         massField = new JTextField("1.0");
         springConstantField = new JTextField("2.3");
@@ -94,6 +98,7 @@ public class MainPage extends JFrame {
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new FlowLayout());
+        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(15,0,0,0));
 
         startButton = new JButton("Выполнить");
         startButton.addActionListener(e -> {
@@ -113,6 +118,9 @@ public class MainPage extends JFrame {
         saveButton = new JButton("Сохранить изображения графиков");
         saveButton.addActionListener(e -> saveChartsToFile());
 
+        logDataButton = new JButton("Логирование данных");
+        logDataButton.addActionListener(e -> logDataToFile());
+
         aboutAuthorButton = new JButton("Об авторе");
         aboutAuthorButton.addActionListener(e -> new Author());
 
@@ -126,6 +134,7 @@ public class MainPage extends JFrame {
         buttonsPanel.add(startButton);
         buttonsPanel.add(clearButton);
         buttonsPanel.add(saveButton);
+        buttonsPanel.add(logDataButton);
         controlPanel.add(buttonsPanel);
         mainPanel.add(controlPanel, BorderLayout.SOUTH);
 
@@ -227,6 +236,34 @@ public class MainPage extends JFrame {
 
         File file = new File(filePath);
         ChartUtilities.saveChartAsPNG(file, chart, WIDTH, HEIGHT);
+    }
+
+    private void logDataToFile() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Логирование данных");
+        int userSelection = fileChooser.showSaveDialog(this);
+
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            String filePath = file.getAbsolutePath();
+
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+                writer.write("Время\tСмещение\tСкорость\tУскорение\n");
+
+                for (int i = 0; i < displacementSeries.getItemCount(); i++) {
+                    double time = displacementSeries.getX(i).doubleValue();
+                    double displacement = displacementSeries.getY(i).doubleValue();
+                    double velocity = velocitySeries.getY(i).doubleValue();
+                    double acceleration = accelerationSeries.getY(i).doubleValue();
+
+                    writer.write(String.format("%.2f\t%.2f\t%.2f\t%.2f\n", time, displacement, velocity, acceleration));
+                }
+
+                JOptionPane.showMessageDialog(this, "Данные сохранены успешно", "Логирование данных", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Ошибка логирования данных", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     public static void main(String[] args) {
