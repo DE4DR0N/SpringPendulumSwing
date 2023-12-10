@@ -28,9 +28,6 @@ public class MainPage extends JFrame {
 
     private JButton startButton;
     private JButton clearButton;
-    private JButton aboutAuthorButton;
-    private JButton aboutProgramButton;
-    private JButton exitButton;
     private JButton saveButton;
     private JButton logDataButton;
 
@@ -105,6 +102,7 @@ public class MainPage extends JFrame {
             startButton.setEnabled(false);
             clearButton.setEnabled(false);
             saveButton.setEnabled(false);
+            logDataButton.setEnabled(false);
             clearCharts();
             startTimer();
         });
@@ -121,13 +119,13 @@ public class MainPage extends JFrame {
         logDataButton = new JButton("Логирование данных");
         logDataButton.addActionListener(e -> logDataToFile());
 
-        aboutAuthorButton = new JButton("Об авторе");
+        JButton aboutAuthorButton = new JButton("Об авторе");
         aboutAuthorButton.addActionListener(e -> new Author());
 
-        aboutProgramButton = new JButton("О программе");
+        JButton aboutProgramButton = new JButton("О программе");
         aboutProgramButton.addActionListener(e -> new About());
 
-        exitButton = new JButton("Exit");
+        JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(e -> System.exit(0));
 
         controlPanel.add(inputPanel);
@@ -190,6 +188,7 @@ public class MainPage extends JFrame {
                     startButton.setEnabled(true);
                     clearButton.setEnabled(true);
                     saveButton.setEnabled(true);
+                    logDataButton.setEnabled(true);
                     double period = pendulum.calculatePeriod();
                     periodField.setText(String.format("%.2f", period) + " секунд");
                 }
