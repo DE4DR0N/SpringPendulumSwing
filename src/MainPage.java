@@ -16,6 +16,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Класс главного окна программы
+ */
 public class MainPage extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
@@ -41,6 +44,9 @@ public class MainPage extends JFrame {
 
     private Timer timer;
 
+    /**
+     * Конструктор создающий окно
+     */
     public MainPage() {
         super("Пружинный маятник");
 
@@ -49,6 +55,9 @@ public class MainPage extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    /**
+     * Метод создающий элементы графического интерфейса
+     */
     private void setupUI() {
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(new EmptyBorder(5,10,5,10));
@@ -76,19 +85,19 @@ public class MainPage extends JFrame {
         periodField = new JTextField();
         periodField.setEditable(false);
 
-        inputPanel.add(new JLabel("Масса:", SwingConstants.RIGHT));
+        inputPanel.add(new JLabel("Масса: ", SwingConstants.RIGHT));
         inputPanel.add(massField);
-        inputPanel.add(new JLabel("Постоянная пружины:", SwingConstants.RIGHT));
+        inputPanel.add(new JLabel("Постоянная пружины: ", SwingConstants.RIGHT));
         inputPanel.add(springConstantField);
-        inputPanel.add(new JLabel("Начальное отклонение:", SwingConstants.RIGHT));
+        inputPanel.add(new JLabel("Начальное отклонение: ", SwingConstants.RIGHT));
         inputPanel.add(initialDisplacementField);
-        inputPanel.add(new JLabel("Начальная скорость:", SwingConstants.RIGHT));
+        inputPanel.add(new JLabel("Начальная скорость: ", SwingConstants.RIGHT));
         inputPanel.add(initialVelocityField);
-        inputPanel.add(new JLabel("Гравитационная постоянная:", SwingConstants.RIGHT));
+        inputPanel.add(new JLabel("Гравитационная постоянная: ", SwingConstants.RIGHT));
         inputPanel.add(gravityField);
-        inputPanel.add(new JLabel("Время моделирования:", SwingConstants.RIGHT));
+        inputPanel.add(new JLabel("Время моделирования: ", SwingConstants.RIGHT));
         inputPanel.add(targetTimeField);
-        inputPanel.add(new JLabel("Период колебания:", SwingConstants.RIGHT));
+        inputPanel.add(new JLabel("Период колебания: ", SwingConstants.RIGHT));
         inputPanel.add(periodField);
 
         JPanel functionalButtons = new JPanel();
@@ -139,6 +148,12 @@ public class MainPage extends JFrame {
         add(mainPanel);
     }
 
+    /**
+     * Метод создающий объект класса JFreeChart
+     * @param series Коллекция координат
+     * @param chartTitle Название графика
+     * @return Новый объект класса JFreeChart
+     */
     private JPanel createChartPanel(XYSeries series, String chartTitle) {
         XYSeriesCollection dataset = new XYSeriesCollection(series);
         JFreeChart chart = ChartFactory.createXYLineChart(
@@ -150,6 +165,10 @@ public class MainPage extends JFrame {
         return new ChartPanel(chart);
     }
 
+    /**
+     * Метод инициализирующий таймер
+     * и обновляющий график с течением времени.
+     */
     private void startTimer() {
         try {
             double mass = Double.parseDouble(massField.getText());
@@ -204,12 +223,18 @@ public class MainPage extends JFrame {
         }
     }
 
+    /**
+     * Метод очищающий графики
+     */
     private void clearCharts() {
         displacementSeries.clear();
         velocitySeries.clear();
         accelerationSeries.clear();
     }
 
+    /**
+     * Метод вызывающий окно сохранения файла
+     */
     private void saveChartsToFile() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Сохранение изображения графиков");
@@ -232,6 +257,12 @@ public class MainPage extends JFrame {
         }
     }
 
+    /**
+     * Сохранение файла
+     * @param series Коллекция координат
+     * @param chartTitle Название графика
+     * @param filePath путь к файлу
+     */
     private void saveChartToFile(XYSeries series, String chartTitle, String filePath) throws IOException {
         XYSeriesCollection dataset = new XYSeriesCollection(series);
         JFreeChart chart = ChartFactory.createXYLineChart(
@@ -247,6 +278,9 @@ public class MainPage extends JFrame {
         ChartUtilities.saveChartAsPNG(file, chart, WIDTH, HEIGHT);
     }
 
+    /**
+     * Метод логирующий данные в текстовый файл
+     */
     private void logDataToFile() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Логирование данных");

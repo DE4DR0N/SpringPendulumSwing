@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * Класс программы реализующий информацию о программе
+ */
 public class About extends JDialog {
     public About() {
         JPanel mainPanel = new JPanel();
@@ -22,7 +24,7 @@ public class About extends JDialog {
         pnlText.add(new JLabel("1. Выводить графики скорости, усорения, положения тела в пространстве"));
         pnlText.add(new JLabel("2. Сохранять результаты в файл"));
 
-        ImageIcon imageIcon = new ImageIcon("src/pictures/AppScreen.png");
+        ImageIcon imageIcon = new ImageIcon("/pictures/AppScreen.png");
         imageIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(200,200, Image.SCALE_SMOOTH));
         JLabel imageLabel = new JLabel(imageIcon);
 
