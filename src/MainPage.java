@@ -39,8 +39,6 @@ public class MainPage extends JFrame {
     private JTextField targetTimeField;
     private JTextField periodField;
 
-
-
     private Timer timer;
 
     public MainPage() {
@@ -93,9 +91,9 @@ public class MainPage extends JFrame {
         inputPanel.add(new JLabel("Период колебания:", SwingConstants.RIGHT));
         inputPanel.add(periodField);
 
-        JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setLayout(new FlowLayout());
-        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(15,0,0,0));
+        JPanel functionalButtons = new JPanel();
+        functionalButtons.setLayout(new FlowLayout());
+        functionalButtons.setBorder(BorderFactory.createEmptyBorder(15,0,0,0));
 
         startButton = new JButton("Выполнить");
         startButton.addActionListener(e -> {
@@ -125,18 +123,18 @@ public class MainPage extends JFrame {
         exitButton.addActionListener(e -> System.exit(0));
 
         controlPanel.add(inputPanel);
-        buttonsPanel.add(startButton);
-        buttonsPanel.add(clearButton);
-        buttonsPanel.add(saveButton);
-        buttonsPanel.add(logDataButton);
-        controlPanel.add(buttonsPanel);
+        functionalButtons.add(startButton);
+        functionalButtons.add(clearButton);
+        functionalButtons.add(saveButton);
+        functionalButtons.add(logDataButton);
+        controlPanel.add(functionalButtons);
         mainPanel.add(controlPanel, BorderLayout.SOUTH);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout());
-        buttonPanel.add(aboutAuthorButton);
-        buttonPanel.add(aboutProgramButton);
-        buttonPanel.add(exitButton);
-        mainPanel.add(buttonPanel, BorderLayout.NORTH);
+        JPanel extraButtons = new JPanel(new FlowLayout());
+        extraButtons.add(aboutAuthorButton);
+        extraButtons.add(aboutProgramButton);
+        extraButtons.add(exitButton);
+        mainPanel.add(extraButtons, BorderLayout.NORTH);
 
         add(mainPanel);
     }
@@ -182,7 +180,6 @@ public class MainPage extends JFrame {
                     velocitySeries.add(time, velocity);
                     accelerationSeries.add(time, acceleration);
 
-
                     pendulum.update();
                     elapsedTime += 0.02;
 
@@ -200,7 +197,10 @@ public class MainPage extends JFrame {
             timer.start();
         }
         catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Неверные данные. Введите корректные данные", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,
+                    "Неверные данные. Введите корректные данные",
+                    "Ошибка",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -224,7 +224,10 @@ public class MainPage extends JFrame {
                 saveChartToFile(velocitySeries, "Скорость", filePath + "_скорость.png");
                 saveChartToFile(accelerationSeries, "Ускорение", filePath + "_ускорение.png");
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "Ошибка сохранения изображения", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Ошибка сохранения изображения",
+                        "Ошибка",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -265,9 +268,15 @@ public class MainPage extends JFrame {
                     writer.write(String.format("%.2f\t%.2f\t\t%.2f\t\t%.2f\n", time, displacement, velocity, acceleration));
                 }
 
-                JOptionPane.showMessageDialog(this, "Данные сохранены успешно", "Логирование данных", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Данные сохранены успешно",
+                        "Логирование данных",
+                        JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(this, "Ошибка логирования данных", "Ошибка", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Ошибка логирования данных",
+                        "Ошибка",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }
