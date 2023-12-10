@@ -1,18 +1,18 @@
 public class SpringPendulum {
-    private static final double MASS = 1.0;
-    private static final double SPRING_CONSTANT = 10.0;
-    private final double gravity;
-
+    private double mass;
+    private double springConstant;
     private double displacement;
     private double velocity;
     private double acceleration;
     private double time;
+    private double gravity;
 
-
-    public SpringPendulum(double initialDisplacement, double initialVelocity, double initialAcceleration, double gravity) {
+    public SpringPendulum(double mass, double springConstant, double initialDisplacement, double initialVelocity, double gravity) {
+        this.mass = mass;
+        this.springConstant = springConstant;
         this.displacement = initialDisplacement;
         this.velocity = initialVelocity;
-        this.acceleration = initialAcceleration;
+        this.acceleration = 0.0;
         this.time = 0.0;
         this.gravity = gravity;
     }
@@ -34,12 +34,15 @@ public class SpringPendulum {
     }
 
     public void update() {
-        double springForce = -SPRING_CONSTANT * displacement;
-        double netForce = MASS * gravity + springForce;
+        double springForce = -springConstant * displacement;
+        double netForce = mass * gravity + springForce;
 
-        acceleration = netForce / MASS;
-        velocity += acceleration * 0.02; // time step = 0.02 seconds
+        acceleration = netForce / mass;
+        velocity += acceleration * 0.02;
         displacement += velocity * 0.02;
         time += 0.02;
+    }
+    public double calculatePeriod() {
+        return 2 * Math.PI * Math.sqrt(mass / springConstant);
     }
 }
