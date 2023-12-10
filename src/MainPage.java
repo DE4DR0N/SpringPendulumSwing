@@ -213,9 +213,9 @@ public class MainPage extends JFrame {
             String filePath = file.getAbsolutePath();
 
             try {
-                saveChartToFile(displacementSeries, "Displacement", filePath + "_смещение.png");
-                saveChartToFile(velocitySeries, "Velocity", filePath + "_скорость.png");
-                saveChartToFile(accelerationSeries, "Acceleration", filePath + "_ускорение.png");
+                saveChartToFile(displacementSeries, "Смещение", filePath + "_смещение.png");
+                saveChartToFile(velocitySeries, "Скорость", filePath + "_скорость.png");
+                saveChartToFile(accelerationSeries, "Ускорение", filePath + "_ускорение.png");
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "Ошибка сохранения изображения", "Ошибка", JOptionPane.ERROR_MESSAGE);
             }
@@ -244,7 +244,7 @@ public class MainPage extends JFrame {
 
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
-            String filePath = file.getAbsolutePath();
+            String filePath = file.getAbsolutePath() + ".txt";
 
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
                 writer.write("Время\tСмещение\tСкорость\tУскорение\n");
@@ -255,7 +255,7 @@ public class MainPage extends JFrame {
                     double velocity = velocitySeries.getY(i).doubleValue();
                     double acceleration = accelerationSeries.getY(i).doubleValue();
 
-                    writer.write(String.format("%.2f\t%.2f\t%.2f\t%.2f\n", time, displacement, velocity, acceleration));
+                    writer.write(String.format("%.2f\t%.2f\t\t%.2f\t\t%.2f\n", time, displacement, velocity, acceleration));
                 }
 
                 JOptionPane.showMessageDialog(this, "Данные сохранены успешно", "Логирование данных", JOptionPane.INFORMATION_MESSAGE);
