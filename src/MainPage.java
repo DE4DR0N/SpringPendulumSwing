@@ -96,6 +96,8 @@ public class MainPage extends JFrame {
         startButton = new JButton("Выполнить");
         startButton.addActionListener(e -> {
             startButton.setEnabled(false);
+            clearButton.setEnabled(false);
+            saveButton.setEnabled(false);
             clearCharts();
             startTimer();
         });
@@ -175,6 +177,8 @@ public class MainPage extends JFrame {
                 if (elapsedTime >= targetTime) {
                     timer.stop();
                     startButton.setEnabled(true);
+                    clearButton.setEnabled(true);
+                    saveButton.setEnabled(true);
                     double period = pendulum.calculatePeriod();
                     periodField.setText(String.format("%.2f", period) + " секунд");
                 }
