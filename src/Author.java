@@ -8,7 +8,7 @@ public class Author extends JDialog {
         setLayout(new BorderLayout());
 
         JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        ImageIcon icon = new ImageIcon("/pictures/Author.jpg");
+        ImageIcon icon = new ImageIcon("src/pictures/Author.jpg");
         icon = new ImageIcon(icon.getImage().getScaledInstance(256,256, Image.SCALE_SMOOTH));
         JLabel imageLabel = new JLabel(icon);
         imagePanel.add(imageLabel);
