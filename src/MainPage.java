@@ -5,6 +5,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.w3c.dom.events.EventException;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -15,6 +16,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Executable;
 
 /**
  * Класс главного окна программы
@@ -206,7 +208,9 @@ public class MainPage extends JFrame {
             double initialVelocity = Double.parseDouble(initialVelocityField.getText());
             double gravity = Double.parseDouble(gravityField.getText());
             double targetTime = Double.parseDouble(targetTimeField.getText());
-
+            if (mass <= 0 || springConstant <= 0 || gravity < 0) {
+                throw new IllegalArgumentException();
+            }
             startButton.setEnabled(false);
             clearButton.setEnabled(false);
             saveButton.setEnabled(false);
@@ -247,6 +251,12 @@ public class MainPage extends JFrame {
         catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this,
                     "Неверные данные. Введите корректные данные",
+                    "Ошибка",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Введены отрицательные данные",
                     "Ошибка",
                     JOptionPane.ERROR_MESSAGE);
         }
