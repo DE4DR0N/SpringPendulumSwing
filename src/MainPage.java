@@ -29,14 +29,6 @@ public class MainPage extends JFrame {
     private XYSeries velocitySeries;
     private XYSeries accelerationSeries;
 
-    private JMenuBar menuBar;
-    private JMenu fileMenu;
-    private JMenu informMenu;
-    private JMenuItem saveMenuItem;
-    private JMenuItem saveImgMenuItem;
-    private JMenuItem exitMenuItem;
-    private JMenuItem abtMenuItem;
-    private JMenuItem authMenuItem;
     private JButton startButton;
     private JButton clearButton;
     private JButton saveButton;
@@ -112,28 +104,7 @@ public class MainPage extends JFrame {
         functionalButtons.setLayout(new FlowLayout());
         functionalButtons.setBorder(BorderFactory.createEmptyBorder(15,0,0,0));
 
-        menuBar = new JMenuBar();
-        fileMenu = new JMenu("Файл");
-        saveMenuItem = new JMenuItem("Сохранить данные");
-        saveMenuItem.addActionListener(e -> logDataToFile());
-        saveImgMenuItem = new JMenuItem("Сохранить графики");
-        saveImgMenuItem.addActionListener(e -> saveChartsToFile());
-        exitMenuItem = new JMenuItem("Выход");
-        exitMenuItem.addActionListener(e -> System.exit(1));
-        fileMenu.add(saveMenuItem);
-        fileMenu.add(saveImgMenuItem);
-        fileMenu.addSeparator();
-        fileMenu.add(exitMenuItem);
-        menuBar.add(fileMenu);
-
-        informMenu = new JMenu("Справка");
-        abtMenuItem = new JMenuItem("О программе");
-        abtMenuItem.addActionListener(e -> new About());
-        authMenuItem = new JMenuItem("Об авторе");
-        authMenuItem.addActionListener(e -> new Author());
-        informMenu.add(abtMenuItem);
-        informMenu.add(authMenuItem);
-        menuBar.add(informMenu);
+        JMenuBar menuBar = getjMenuBar();
 
         startButton = new JButton("Выполнить");
         startButton.addActionListener(e -> {
@@ -178,6 +149,32 @@ public class MainPage extends JFrame {
 
         setJMenuBar(menuBar);
         add(mainPanel);
+    }
+
+    private JMenuBar getjMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("Файл");
+        JMenuItem saveMenuItem = new JMenuItem("Сохранить данные");
+        saveMenuItem.addActionListener(e -> logDataToFile());
+        JMenuItem saveImgMenuItem = new JMenuItem("Сохранить графики");
+        saveImgMenuItem.addActionListener(e -> saveChartsToFile());
+        JMenuItem exitMenuItem = new JMenuItem("Выход");
+        exitMenuItem.addActionListener(e -> System.exit(1));
+        fileMenu.add(saveMenuItem);
+        fileMenu.add(saveImgMenuItem);
+        fileMenu.addSeparator();
+        fileMenu.add(exitMenuItem);
+        menuBar.add(fileMenu);
+
+        JMenu informMenu = new JMenu("Справка");
+        JMenuItem abtMenuItem = new JMenuItem("О программе");
+        abtMenuItem.addActionListener(e -> new About());
+        JMenuItem authMenuItem = new JMenuItem("Об авторе");
+        authMenuItem.addActionListener(e -> new Author());
+        informMenu.add(abtMenuItem);
+        informMenu.add(authMenuItem);
+        menuBar.add(informMenu);
+        return menuBar;
     }
 
     /**
